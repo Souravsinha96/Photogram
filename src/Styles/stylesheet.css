@@ -1,0 +1,72 @@
+@import url("http://fonts.cdnfonts.com/css/billabong");
+html {
+  font-size: 10px;
+  font-family: sans-serif;
+}
+body {
+  margin: 0;
+}
+p {
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+h1 {
+  background-image: linear-gradient(
+    to right,
+    #051937,
+    #004d7a,
+    #008793,
+    #00bf72,
+    #a8eb12
+  );
+  text-shadow: 5px 5px 0 #bcbcbc, 4px 4px 0 #9c9c9c;
+  font-family: "Billabong", sans-serif;
+  text-align: center;
+  font-size: 13rem;
+  font-weight: 100;
+  margin: 0 0 4rem 0;
+  letter-spacing: -1px;
+  padding: 5px;
+}
+.photoGrid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.figure {
+  flex-basis: calc(33.333% - 4rem);
+  border: 1px solid #d3d3d3;
+  padding: 2rem;
+  flex-grow: 1;
+  margin: 0 2rem 2rem 2rem;
+  border-radius: 3px;
+  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+.photo {
+  width: calc(100% + 4rem);
+
+  margin: -2rem 0 0 -2rem;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+.remove {
+  color: #e40017;
+  flex-basis: 48%;
+  padding: 5px;
+  line-height: 2;
+  font-size: 15px;
+  background-color: transparent;
+  border: 2px solid #d3d3d3;
+  font-family: "Billabong-regular", sans-serif;
+  border-radius: 5px;
+}
+.remove:hover {
+  cursor: pointer;
+  transform: scale(0.98);
+  transition: transform 0.3s ease-in-out;
+  border-color: #e40017;
+}
