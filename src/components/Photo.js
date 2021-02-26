@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 export class Photo extends Component {
   render() {
     const post = this.props.post;
@@ -10,11 +10,22 @@ export class Photo extends Component {
           <p>{post.description}</p>
         </figcaption>
         <div className="button-container">
-          <button className="remove">Remove</button>
+          <button
+            className="remove"
+            onClick={() => {
+              this.props.onRemovePhoto(post);
+            }}
+          >
+            Remove
+          </button>
         </div>
       </figure>
     );
   }
 }
+Photo.propTypes = {
+  post: PropTypes.object.isRequired,
+  onRemovePhoto: PropTypes.func.isRequired,
+};
 
 export default Photo;
