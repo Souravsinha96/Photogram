@@ -8,15 +8,11 @@ class PhotoWall extends Component {
       <div>
         <Link to="/AddPhoto" className="addIcon"></Link>
         <div className="photoGrid">
-          {this.props.posts.map((post, index) => {
-            return (
-              <Photo
-                onRemovePhoto={this.props.onRemovePhoto}
-                key={index}
-                post={post}
-              />
-            );
-          })}
+          {this.props.posts
+            .sort((x, y) => y.id - x.id)
+            .map((post) => {
+              return <Photo {...this.props} key={post.id} post={post} />;
+            })}
         </div>
       </div>
     );
@@ -24,6 +20,5 @@ class PhotoWall extends Component {
 }
 PhotoWall.propTypes = {
   posts: PropTypes.array.isRequired,
-  onRemovePhoto: PropTypes.func.isRequired,
 };
 export default PhotoWall;

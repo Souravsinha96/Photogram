@@ -2,56 +2,45 @@ import React, { Component } from "react";
 import Title from "./components/Title";
 import AddPhoto from "./components/AddPhoto";
 import PhotoWall from "./components/PhotoWall";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { removePost, addPost } from "./Redux/action";
 class App extends Component {
-  state = {
-    posts: [
-      {
-        id: "0",
-        description: "beautiful landscape",
-        imageLink:
-          "https://image.jimcdn.com/app/cms/image/transf/none/path/sa6549607c78f5c11/image/i4eeacaa2dbf12d6d/version/1490299332/most-beautiful-landscapes-in-europe-lofoten-european-best-destinations-copyright-iakov-kalinin.jpg" +
-          "3919321_1443393332_n.jpg",
-      },
-      {
-        id: "1",
-        description: "Aliens???",
-        imageLink: "https://s3.india.com/wp-content/uploads/2017/12/rocket.jpg",
-      },
-      {
-        id: "2",
-        description: "On a vacation!",
-        imageLink:
-          "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2017/08/24/104670887-VacationExplainsTHUMBWEB.1910x1000.jpg",
-      },
-    ],
-  };
-  removePhoto = (postRemoved) => {
-    this.setState((state) => ({
-      posts: state.posts.filter((post) => post !== postRemoved),
-    }));
-  };
   render() {
     return (
       <div>
+        <h1>
+          <Link to="/">Photogram</Link>
+        </h1>
+
         <Route
           path="/"
           exact
           render={() => (
             <div>
-              <Title title="Photogram" />
-              <PhotoWall
-                posts={this.state.posts}
-                onRemovePhoto={this.removePhoto}
-              />
+              <PhotoWall {...this.props} />
             </div>
           )}
         />
 
-        <Route path="/AddPhoto" exact component={AddPhoto} />
+        <Route
+          path="/AddPhoto"
+          exact
+          render={({ history }) => (
+            <AddPhoto {...this.props} onHistory={history} />
+          )}
+        />
       </div>
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    posts: state,
+  };
+};
 
-export default App;
+export default connect(mapStateToProps, {
+  removePost,
+  addPost,
+})(App);
