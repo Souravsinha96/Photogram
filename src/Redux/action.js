@@ -13,3 +13,10 @@ export const addPost = (post) => {
     payload: post,
   };
 };
+export const addComment = (comment, postId) => {
+  return {
+    type: "ADD_COMMENT",
+    payload: comment,
+    payload1: postId,
+  };
+};

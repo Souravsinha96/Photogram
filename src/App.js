@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Title from "./components/Title";
 import AddPhoto from "./components/AddPhoto";
 import PhotoWall from "./components/PhotoWall";
 import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { removePost, addPost } from "./Redux/action";
+import { removePost, addPost, addComment } from "./Redux/action";
+import Single from "./components/Single";
 class App extends Component {
   render() {
     return (
@@ -16,9 +16,9 @@ class App extends Component {
         <Route
           path="/"
           exact
-          render={() => (
+          render={({ history }) => (
             <div>
-              <PhotoWall {...this.props} />
+              <PhotoWall {...this.props} history={history} />
             </div>
           )}
         />
@@ -30,17 +30,30 @@ class App extends Component {
             <AddPhoto {...this.props} onHistory={history} />
           )}
         />
+        <Route
+          path="/single/:id"
+          excat
+          render={(params) => (
+            <Single
+              // put this.props first and then the params , bcz both has match object , we want match for params
+              {...this.props}
+              {...params}
+            />
+          )}
+        />
       </div>
     );
   }
 }
 const mapStateToProps = (state) => {
   return {
-    posts: state,
+    posts: state.posts,
+    comments: state.comments,
   };
 };
 
 export default connect(mapStateToProps, {
   removePost,
   addPost,
+  addComment,
 })(App);

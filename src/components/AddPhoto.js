@@ -16,7 +16,6 @@ class AddPhoto extends Component {
     }
   };
   render() {
-    console.log(this.props);
     return (
       <div className="form">
         <form onSubmit={this.handleSubmit}>
