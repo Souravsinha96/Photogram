@@ -3,9 +3,26 @@ import AddPhoto from "./components/AddPhoto";
 import PhotoWall from "./components/PhotoWall";
 import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { removePost, addPost, addComment } from "./Redux/action";
+import {
+  removePost,
+  addPost,
+  addComment,
+  startAddingPost,
+  startLoadingPost,
+  startRemovingPost,
+  startAddingComment,
+  startLoadingComments,
+} from "./Redux/action";
 import Single from "./components/Single";
 class App extends Component {
+  state = { loading: true };
+
+  componentDidMount() {
+    this.props.startLoadingPost().then(() => {
+      this.setState({ loading: false });
+    });
+    this.props.startLoadingComments();
+  }
   render() {
     return (
       <div>
@@ -38,6 +55,7 @@ class App extends Component {
               // put this.props first and then the params , bcz both has match object , we want match for params
               {...this.props}
               {...params}
+              loading={this.state.loading}
             />
           )}
         />
@@ -53,7 +71,12 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
+  startAddingPost,
   removePost,
   addPost,
   addComment,
+  startLoadingPost,
+  startRemovingPost,
+  startAddingComment,
+  startLoadingComments,
 })(App);

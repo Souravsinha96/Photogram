@@ -7,6 +7,8 @@ const postReducer = (state = posts, action) => {
       return state.filter((post) => post.id !== action.payload);
     case "ADD_POST":
       return [...state, action.payload];
+    case "LOAD_POSTS":
+      return action.payload;
     default:
       return state;
   }
@@ -23,6 +25,8 @@ const commentReducer = (state = {}, action) => {
           [action.payload1]: [...state[action.payload1], action.payload],
         };
       }
+    case "LOAD_COMMENTS":
+      return action.payload;
 
     default:
       return state;

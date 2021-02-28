@@ -4,10 +4,15 @@ import App from "./App";
 import "../src/Styles/stylesheet.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import reduxThunk from "redux-thunk";
 import rootReducer from "./Redux/reducer";
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-const store = createStore(rootReducer, composeEnhancers());
+import { data } from "./database/config";
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(reduxThunk))
+);
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
