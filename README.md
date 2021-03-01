@@ -1,3 +1,7 @@
+Photogram web app based on React, react-router, redux, and Firebase.
+
+Screengrab:
+![Photogram.gif](ss/Photogram.gif)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
